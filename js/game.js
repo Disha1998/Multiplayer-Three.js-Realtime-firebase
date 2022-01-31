@@ -13,8 +13,7 @@ var fbRef = new Firebase(
 // const fbRef=new firebase("multithree-1b162.firebaseapp.com/data");
 // console.log(fbRef,'fb====>');
 
-// db = 
-
+// db =
 
 // disha
 
@@ -30,15 +29,15 @@ function loadGame() {
 
   initMainPlayer();
 
-    listenToOtherPlayers();
+  listenToOtherPlayers();
 
-    window.onunload = function () {
-      fbRef.child("Players/" + playerID).remove();
-    };
+  window.onunload = function () {
+    fbRef.child("Players/" + playerID).remove();
+  };
 
-    window.onbeforeunload = function () {
-      fbRef.child("Players/" + playerID).remove();
-    };
+  window.onbeforeunload = function () {
+    fbRef.child("Players/" + playerID).remove();
+  };
 }
 
 function listenToPlayer(playerData) {
@@ -57,29 +56,30 @@ function listenToOtherPlayers() {
       if (playerID != playerData.key() && !otherPlayers[playerData.key()]) {
         otherPlayers[playerData.key()] = new Player(playerData.key());
         otherPlayers[playerData.key()].init();
-        fbRef.child("Players").child(playerData.key()).on("value", listenToPlayer);
+        fbRef
+          .child("Players")
+          .child(playerData.key())
+          .on("value", listenToPlayer);
       }
     }
-  }); 
+  });
 
-// when a player is removed, do something
+  // when a player is removed, do something
 
-//   fbRef.child("Players").on("child_removed", function (playerData) {
-//     if (playerData.val()) {
-//       fbRef.child("Players").child(playerData.key).off("value", listenToPlayer);
-//       scene.remove(otherPlayers[playerData.key].mesh);
-//       delete otherPlayers[playerData.key];
-//     }
-//   });
+  //   fbRef.child("Players").on("child_removed", function (playerData) {
+  //     if (playerData.val()) {
+  //       fbRef.child("Players").child(playerData.key).off("value", listenToPlayer);
+  //       scene.remove(otherPlayers[playerData.key].mesh);
+  //       delete otherPlayers[playerData.key];
+  //     }
+  //   });
 }
 // var newRef = firebase.database()
 // console.log(newRef,"reffffff----");
 function initMainPlayer() {
   playerID = fbRef.child("Players").push().key();
-  console.log(playerID,'iddd--');
-  
+  console.log(playerID, "iddd--");
 
- 
   fbRef
     .child("Players")
     .child(playerID)
@@ -93,9 +93,9 @@ function initMainPlayer() {
   player.isMainPlayer = true;
   player.init();
 }
- // fbRef.child( "Players/" + playerID ).set({
-  // 	isOnline: true,
-  // 	orientation: {
+// fbRef.child( "Players/" + playerID ).set({
+// 	isOnline: true,
+// 	orientation: {
 
 function loadEnvironment() {
   var sphere_geometry = new THREE.SphereGeometry(1);
